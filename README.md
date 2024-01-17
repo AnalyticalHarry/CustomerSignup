@@ -1,2 +1,9 @@
-# CustomerSignup
-I am building back end coding for customer sign up from python, which can be utilized with front end coding to collect data for product development or product validation. 
+# Customer Signup
+
+Customer sign up from python and JavaScript
+
+- First Name
+- Last Name
+- Address (First Line of Address, Postcode and Country)
+- Phone Numbers
+- Email Address
