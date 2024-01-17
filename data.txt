@@ -1,0 +1,2 @@
+{'first_name': 'hemant ', 'last_name': 'thapa', 'country': 'united kingdom', 'address': '8 cecil street ', 'postcode': 'g128rq', 'gender': 'male', 'email': 'hemantthapa1998@gmail.com', 'contact': 7752106224}
+{'first_name': 'hemant', 'last_name': 'thapa', 'country': 'united kingdom', 'address': 'glasgow', 'postcode': 'g12', 'gender': 'male', 'email': 'hemantthapa1998@gmail.com', 'contact': 7752106224}
