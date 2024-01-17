@@ -69,14 +69,14 @@ def signup_process(Fname_list, Lname_list, Country_list, Address_list, Postcode_
             continue
 
         while True:
-            value7 = input("Enter your Contact Number (integer only, type 'exit' to cancel): ")
+            value7 = input("Enter your Contact Number ('exit' to cancel): ")
             if value7 == 'exit':
                 print("Exiting signup process...")
                 return
             elif value7.isdigit():
                 break
             else:
-                print("Error: Contact must be an integer.")
+                print("Error: Contact must be numerical.")
         #sign up records
         print("\nSuccessfully, sign-up completed.")
         Fname_list.append(value)
@@ -288,7 +288,7 @@ def main():
                     new_contact = int(new_contact)
                     break
                 else:
-                    print("Error: Contact must be an integer.")
+                    print("Error: Contact must be an numerical value.")
             if new_contact == 'exit':
                 continue
             update_record(email, new_first_name, new_last_name, new_country, new_address, new_postcode, new_gender, new_contact)
