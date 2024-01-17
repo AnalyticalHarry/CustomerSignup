@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import re
 import numpy as np
+import json
 import openpyxl
 import warnings
 warnings.filterwarnings("ignore")
@@ -236,7 +237,23 @@ def export_to_xlsx():
     #export to XLSX
     df.to_excel('records.xlsx', index=False)
     print("Data exported to records.xlsx")
+    
+#function to export records to JSON file
+def export_to_json():
+    # Read data from the text file
+    with open('data.txt', 'r') as file:
+        records = [eval(record) for record in file]
+    
+    if not records:
+        print("No records to export.")
+        return
 
+    # Export to JSON
+    with open('records.json', 'w') as json_file:
+        json.dump(records, json_file, indent=4)
+
+    print("Data exported to records.json")
+    
 #main function to user input
 def main():
     while True:
@@ -247,7 +264,8 @@ def main():
         print("4. Type 'view' to View records")
         print("5. Type 'export_csv' to Export to CSV")
         print("6. Type 'export_xlsx' to Export to XLSX")
-        print("7. Type 'exit' to Exit")
+        print("7. Type 'export_json' to Export to JSON")
+        print("8. Type 'exit' to Exit")
         choice = input("Enter your choice: ")
 
         if choice == 'exit':
@@ -308,7 +326,10 @@ def main():
 
         elif choice == 'export_xlsx':
             export_to_xlsx()
-
+            
+        elif choice == 'export_json':
+            export_to_json()
+            
         else:
             print("Error: Please enter a valid choice.")
 
