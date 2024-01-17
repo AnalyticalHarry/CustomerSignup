@@ -14,7 +14,7 @@ const db = new sqlite3.Database('user_records.db');
 const db = new sqlite3.Database('user_records.db');
 //serialise the database operations inside a callback
 db.serialize(() => {
-    // user table if it doesn't exist, with various fields like first_name, last_name, and etc
+    //user table if it doesn't exist, with various fields like first_name, last_name, and etc
     db.run(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY,
