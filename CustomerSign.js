@@ -1,20 +1,24 @@
+//importing required modules
 const readline = require('readline');
 const fs = require('fs');
 const json2csv = require('json2csv').Parser;
 const XLSX = require('xlsx');
 
+//readline interface for user input
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
+//user records are stored
 const recordsFile = 'data.txt';
 
+//function to handle user sign-up process
 function signupProcess() {
   console.log('Hello, I heard you are interested in our product.');
 
   const userData = {};
-
+  //ask user for their information step by step
   rl.question('Enter your First Name (type "exit" to cancel): ', (firstName) => {
     if (firstName.toLowerCase() === 'exit') {
       console.log('Exiting signup process...');
@@ -131,7 +135,7 @@ function signupProcess() {
     });
   });
 }
-
+//function to save user records to a file
 function saveRecord(record) {
   const recordString = JSON.stringify(record);
   fs.appendFile(recordsFile, recordString.toLowerCase() + '\n', (err) => {
@@ -142,11 +146,11 @@ function saveRecord(record) {
     }
   });
 }
-
+//function to export records to CSV format
 function exportToCSV() {
   const records = [];
 
-  // Read the records from data.txt
+  //read the records from data.txt
   const fileContents = fs.readFileSync(recordsFile, 'utf-8');
   const recordsArray = fileContents.split('\n');
   
@@ -156,12 +160,12 @@ function exportToCSV() {
     }
   });
 
-  // Convert records to CSV
+  //convert records to CSV
   const fields = ['first_name', 'last_name', 'country', 'address', 'postcode', 'gender', 'email', 'contact'];
   const json2csvParser = new json2csv({ fields });
   const csv = json2csvParser.parse(records);
 
-  // Save CSV to a file
+  //save CSV to a file
   fs.writeFileSync('records.csv', csv);
   console.log('Data exported to records.csv');
 }
@@ -169,7 +173,7 @@ function exportToCSV() {
 function exportToXLSX() {
   const records = [];
 
-  // Read the records from data.txt
+  //read the records from data.txt
   const fileContents = fs.readFileSync(recordsFile, 'utf-8');
   const recordsArray = fileContents.split('\n');
   
@@ -179,16 +183,16 @@ function exportToXLSX() {
     }
   });
 
-  // Create a new workbook
+  //create a new workbook
   const workbook = XLSX.utils.book_new();
   
-  // Convert records to worksheet
+  //convert records to worksheet
   const worksheet = XLSX.utils.json_to_sheet(records);
   
-  // Add the worksheet to the workbook
+  //add the worksheet to the workbook
   XLSX.utils.book_append_sheet(workbook, worksheet, 'User Records');
   
-  // Save XLSX to a file
+  //save XLSX to a file
   XLSX.writeFile(workbook, 'records.xlsx');
   console.log('Data exported to records.xlsx');
 }
@@ -196,7 +200,7 @@ function exportToXLSX() {
 function exportToJSON() {
   const records = [];
 
-  // Read the records from data.txt
+  //read the records from data.txt
   const fileContents = fs.readFileSync(recordsFile, 'utf-8');
   const recordsArray = fileContents.split('\n');
   
@@ -206,11 +210,12 @@ function exportToJSON() {
     }
   });
 
-  // Save JSON to a file
+  //save JSON to a file
   fs.writeFileSync('records.json', JSON.stringify(records, null, 2));
   console.log('Data exported to records.json');
 }
 
+//function to view user records
 function viewRecords() {
   const records = fs.readFileSync(recordsFile, 'utf-8').split('\n').filter(Boolean);
 
@@ -233,6 +238,7 @@ function viewRecords() {
   }
 }
 
+//function to edit a user record
 function editRecord(email) {
   const records = fs.readFileSync(recordsFile, 'utf-8').split('\n').filter(Boolean);
   const updatedRecords = [];
@@ -300,6 +306,7 @@ function editRecord(email) {
   }
 }
 
+//function to delete a user record
 function deleteRecord(email) {
   const records = fs.readFileSync(recordsFile, 'utf-8').split('\n').filter(Boolean);
   const updatedRecords = [];
@@ -326,11 +333,13 @@ function deleteRecord(email) {
   rl.close();
 }
 
+//function to save updated records to the file
 function saveRecords(records) {
   const recordsString = records.map((record) => JSON.stringify(record)).join('\n');
   fs.writeFileSync(recordsFile, recordsString + '\n');
 }
 
+//main function to start the program
 function main() {
   console.log('\nMenu:');
   console.log('1. Type "add" to Add User');
