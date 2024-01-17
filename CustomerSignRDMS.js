@@ -1,14 +1,20 @@
+//sqlite3 library and enable verbose mode, which provides additional debugging information.
 const sqlite3 = require('sqlite3').verbose();
+//readline library to create a CLI interface for user input.
 const readline = require('readline');
-
+//readline interface to read user input and display output
 const rl = readline.createInterface({
+    //standard input (keyboard)
     input: process.stdin,
+    //output to standard output (console)
     output: process.stdout
 });
-
+//SQLite database or open an existing one named 'user_records.db'
 const db = new sqlite3.Database('user_records.db');
-
+const db = new sqlite3.Database('user_records.db');
+//serialise the database operations inside a callback
 db.serialize(() => {
+    // user table if it doesn't exist, with various fields like first_name, last_name, and etc
     db.run(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY,
@@ -23,7 +29,7 @@ db.serialize(() => {
         )
     `);
 });
-
+//function signup process
 function signupProcess() {
     console.log("Hello, I heard you are interested in our product.");
 
@@ -135,11 +141,11 @@ function signupProcess() {
         });
     });
 }
-
+//function add user
 function addUser() {
     signupProcess();
 }
-
+//function update records
 function updateRecord() {
     rl.question("Enter the email of the record to update (type 'exit' to cancel): ", (email) => {
         if (email.toLowerCase() === 'exit') {
@@ -221,7 +227,7 @@ function updateRecord() {
         });
     });
 }
-
+//function delete records
 function deleteRecord() {
     rl.question("Enter the email of the record to delete (type 'exit' to cancel): ", (email) => {
         if (email.toLowerCase() === 'exit') {
@@ -238,7 +244,7 @@ function deleteRecord() {
         deleteRecord();
     });
 }
-
+//function view records
 function viewRecords() {
     db.all('SELECT * FROM users', (err, records) => {
         if (err) {
@@ -268,7 +274,7 @@ function viewRecords() {
         rl.close();
     });
 }
-
+//function main
 function main() {
     console.log("\nMenu:");
     console.log("1. Type 'add' to Add User");
