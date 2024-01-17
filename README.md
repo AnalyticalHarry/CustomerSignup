@@ -9,21 +9,21 @@ Customer sign up from python and JavaScript
 - Phone Numbers
 - Email Address
 
-** Node JS libraries: **
+### Node JS libraries: 
 
 ```bash 
 npm install sqlite3, json2csv xlsx
 ```
-** Node Js Libraries **
+### Node Js Libraries 
 ```bash
 const sqlite3 = require('sqlite3').verbose();
 const readline = require('readline');
 ```
-** Python libraries: **
+### Python libraries: 
 ```bash 
 pip install pandas, numpy, tabulate, db-sqlite3
 ```
-** Import Python Libraries **
+### Import Python Libraries 
 ```bash
 import pandas as pd
 import os
